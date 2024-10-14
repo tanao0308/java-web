@@ -1,21 +1,16 @@
 package com.sky.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.sky.entity.Employee;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 @Mapper
-public interface EmployeeMapper {
+public interface EmployeeMapper extends BaseMapper<Employee> {
 
-    /**
-     * 根据用户名查询员工
-     * @param username
-     * @return
-     */
-    @Select("select * from employee where username = #{username}")
-    Employee getByUsername(String username);
-
-    @Insert("insert into employee ()")
-    void insert(Employee employee);
+    default Employee getByUsername(String username) {
+        QueryWrapper<Employee> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username);  // 条件：根据用户名查询
+        return selectOne(queryWrapper);  // selectOne() 返回单个记录
+    }
 }
