@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationProperties(prefix = "sky.jwt")
+/*
+@ConfigurationProperties(prefix = "sky.jwt") 是 Spring Boot 中用于将外部配置文件（如 application.properties 或 application.yml）
+中的属性映射到 Java 类中的注解。它的作用是从配置文件中读取以 sky.jwt 为前缀的配置属性，并将其自动注入到对应的 Java 类的字段中。
+ */
 @Data
 public class JwtProperties {
 
